@@ -1,5 +1,33 @@
 import './App.css';
 
+const skills = [
+    {
+        skill: "Algorithms",
+        level: "advanced",
+        color: "yellow"
+    },
+    {
+        skill: "JavaScript",
+        level: "advanced",
+        color: "orange"
+    },
+    {
+        skill: "React",
+        level: "intermediate",
+        color: "lightblue"
+    },
+    {
+        skill: "ASP.NET",
+        level: "beginner",
+        color: "lightgreen"
+    },
+    {
+        skill: "NestJS",
+        level: "beginner",
+        color: "gray"
+    }
+]
+
 function Avatar() {
     return (
         
@@ -11,16 +39,22 @@ function Intro() {
     return (
         <div>
             <h1>Moise Alexandru</h1>
-            <p>3rd year student at University of Bucharest, I am passionate about computer science, especially app development. In my spare time, I like to play computer games and watch tv shows.</p>
+            <p>3rd year student at University of Bucharest, I am passionate about computer science, app development in particular. In my spare time, I like to play computer games and watch tv shows.</p>
         </div>
     );
 }
 
-function Skill(props) {
+function Skill({currentSkill}) {
+    const {skill, color, level} = currentSkill;
+    console.log(skill);
     return (
-        <div className = "skill" style={{backgroundColor: props.backgroundcolor}}>
-            <span>{props.name}</span>
-            <span>{props.emoji}</span>
+        <div className = "skill" style={{backgroundColor: color}}>
+            <span>{skill}</span>
+            <span>
+                {level === "advanced" && '😄'}
+                {level === "intermediate" && '🙂'}
+                {level === "beginner" && '🙃'}
+            </span>
         </div>
     )
 }
@@ -28,11 +62,15 @@ function Skill(props) {
 function SkillList() {
     return (
         <div className = "skill-list">
-            <Skill name = "Algorithms" backgroundcolor = {"yellow"} emoji = "😄" />
-            <Skill name = "JavaScript" backgroundcolor = {"orange"} emoji = "🙃"/>
-            <Skill name = "React" backgroundcolor = {"lightblue"} emoji = "😄" />
-            <Skill name = "ASP.NET" backgroundcolor = {"lightgreen"} emoji = "❤️" />
-            <Skill name = "NestJS" backgroundcolor = {"gray"} emoji = "😉" />
+            {skills.map((currentSkill) => (
+                <Skill currentSkill = {currentSkill} key = {currentSkill.skill}/>
+            ))}
+            {/*
+            <Skill name = "Algorithms" backgroundColor = {"yellow"} emoji = "😄" />
+            <Skill name = "JavaScript" backgroundCColor = {"orange"} emoji = "🙃"/>
+            <Skill name = "React" backgroundColor = {"lightblue"} emoji = "😄" />
+            <Skill name = "ASP.NET" backgroundColor = {"lightgreen"} emoji = "❤️" />
+            <Skill name = "NestJS" backgroundColor = {"gray"} emoji = "😉" />*/}
         </div>
     );
 }
